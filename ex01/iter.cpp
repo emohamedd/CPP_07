@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   iter.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 20:40:57 by emohamed          #+#    #+#             */
-/*   Updated: 2023/12/18 20:53:29 by emohamed         ###   ########.fr       */
+/*   Created: 2023/12/18 20:40:54 by emohamed          #+#    #+#             */
+/*   Updated: 2023/12/18 20:47:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iter.hpp"
-#include "iter.cpp"
-void print(int &i)
+#include  "iter.hpp"
+
+template <typename T>
+void iter(T *p, T len, void (*f)(T&))
 {
-    std::cout << i << std::endl;
-}
-int main()
-{
-    int int_array[] = {1, 2, 3, 4, 5};
-    
-    iter(int_array, 5, print);
-    return (0);
+    for (T i = 0; i < len; i++)
+        f(p[i]);
 }
