@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:42:35 by emohamed          #+#    #+#             */
-/*   Updated: 2023/12/19 14:53:31 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:10:15 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,44 @@
 template <typename T>
 Array<T>::Array()
 {
-    T *array = new T[];
+    n = 0;
+    this->array = new T[0];
 }
 template <typename T>
-Array<T>::Array(unsigned int n)
+Array<T>::Array(unsigned int num)
 {
-    T *array = new T[n];
+    this->n = num;
+    this->array = new T[num];
 }
 template <typename T>
 Array<T>::Array(Array &obj)
 {
-    (void)obj;
-    return *this;
-}
+    this->n = obj.n;
+    this->array = new T[obj.n];
+    
+    for(unsigned int i = 0; i < obj.n; i++)
+        this->array[n] = obj.array[obj.n];
+    
+}   
 template <typename T>
 Array<T>& Array<T>::operator=(Array &obj)
 {
-    (void)obj;
+    this->n = obj.n;
+    if (this->array)
+        delete [] array;
+    this->array = new T[obj.n];
+    
+    for(unsigned int i = 0; i < obj.n; i++)
+        this->array[n] = obj.array[obj.n];
     return *this;
+}
+
+template <typename T>
+T& Array<T>::operator[](unsigned int number) const
+{
+    if (number >= this->n)
+        throw std::invalid_argument("ERR : -> OUT OF RANGE");
+    return this->array[number];
 }
 
 template <typename T>
@@ -44,5 +64,5 @@ Array<T>::~Array()
 template <typename T>
 T Array<T>::size()
 {
-    return sizeof(array);
+    return this->n;
 }
